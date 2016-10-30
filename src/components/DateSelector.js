@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "react-router/Link";
 
 class DateSelector extends React.Component {
   render() {
@@ -29,7 +30,7 @@ class DateSelector extends React.Component {
     return (
       <ul>
         {
-          dates.map(key => <li key={key}><a href={`/dates/${key}`}>{key}</a></li>)
+          dates.map(key => <li key={key}><Link to={`/dates/${key}`}>{key}</Link></li>)
         }
       </ul>
     );
