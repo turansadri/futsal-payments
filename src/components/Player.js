@@ -9,7 +9,7 @@ class Player extends React.Component {
     if (Object.keys(players).length > 0 && players.constructor === Object) {
       return (
         <div>
-          <h1>{players[playerName].name}</h1>
+          <h1 className="tc">{players[playerName].name}</h1>
           <AddPaymentForm playerName={playerName} addPayment={addPayment} />
           <PlayerPaymentsList payments={players[playerName].payments} />
         </div>
