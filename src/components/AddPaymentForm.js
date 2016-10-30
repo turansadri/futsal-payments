@@ -14,7 +14,7 @@ class AddPaymentForm extends React.Component {
   }
   handlePayment(event, playerName) {
     event.preventDefault();
-    const formattedDate = moment(this.state.startDate);
+    const formattedDate = moment(this.state.startDate).format();
     const payment = {
       date: formattedDate,
       amount: this.amount.value,
@@ -31,17 +31,20 @@ class AddPaymentForm extends React.Component {
   render() {
     const { playerName } = this.props;
     return (
-      <form onSubmit={(e) => { this.handlePayment(e, playerName); }}>
-        {this.props.playerName}
-        {/* <Moment>{this.state.startDate}</Moment> */}
+      <form className="payment-form" onSubmit={(e) => { this.handlePayment(e, playerName); }}>
+        <div className="payment-form__amount">
+          <input ref={(input) => { this.amount = input; }} type="text" />
+          <div className="payment-form__currency">€</div>
+        </div>
         <DatePicker
-          dateFormat="YYYY/MM/DD"
+          dateFormat="DD.MM.YYYY"
           selected={this.state.startDate}
           onChange={this.handleChange}
+          popoverAttachment="top center"
+          popoverTargetAttachment="bottom center"
+          popoverTargetOffset="0px 0px"
         />
-        <input ref={(input) => { this.date = input; }} type="text" placeholder="Date" />
-        <input ref={(input) => { this.amount = input; }} type="text" placeholder="Amount" />
-        <button type="submit">Submit</button>
+        <button type="submit" className="payment-form__submit">Add payment</button>
       </form>
     );
   }
