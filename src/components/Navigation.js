@@ -3,9 +3,10 @@ import Link from "react-router/Link";
 
 const Navigation = () => {
   return (
-    <ul>
-      <li><Link to="/">Calendar</Link></li>
-      <li><Link to="/players">Players</Link></li>
+    <ul className="list navigation">
+      <li><Link to="/">Futsal</Link></li>
+      {/* <li><Link to="/">Calendar</Link></li>
+      <li><Link to="/players">Players</Link></li> */}
     </ul>
   );
 };

@@ -1,0 +1,137 @@
+body {
+  font-family: BlinkMacSystemFont, avenir next, avenir, helvetica, helvetica neue, sans-serif
+}
+.f4 {
+  font-size: 1.6rem;
+}
+input {
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+.navigation {
+  // display: none;
+}
+.date-styled {
+  font-size: 1rem;
+  text-align: center;
+  .day {
+    font-size: 2.7em;
+    font-weight: 700;
+    display: block;
+    padding: 0.4em 0.2em 0;
+  }
+  .month {
+    font-weight: 500;
+    font-size: 1em;
+    margin-bottom: 0.1em;
+    display: block;
+  }
+  .year {
+    font-size: 0.9em;
+    display: block;
+  }
+}
+.date-styled--large {
+  font-size: 1.4rem;
+}
+.date-selector {
+  padding: 0;
+  li {
+    a {
+      color: black;
+      text-align: center;
+      text-decoration: none;
+      background-color: #efefef;
+      display: block;
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%;
+    }
+  }
+}
+.payment-form {
+  margin-bottom: 3em;
+  text-align: center;
+  &__amount {
+    margin: 10px auto 40px;
+    display: inline-block;
+    text-align: center;
+    font-size: 6rem;
+    border-bottom: 2px solid black;
+    input {
+      text-align: right;
+      font-weight: 700;
+      width: 140px;
+      border: none;
+    }
+    .payment-form__currency {
+      color: #ccc;
+      margin-left: 20px;
+      display: inline-block;
+    }
+  }
+  .react-datepicker__input-container {
+    display: block;
+    margin-bottom: 30px;
+    input {
+      width: 140px;
+      padding: 0.4em 0.2em;
+      background-color: #eaeaea;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+  &__submit {
+    width: 90%;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 0;
+    padding: 0.8em 1em;
+    font-weight: 200;
+    text-transform: uppercase;
+    background-color: blue;
+    color: white;
+    margin: 0 auto;
+    display: block;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.payment-history {
+  width: 100%;
+  th {
+    padding: 1em 0.4em 0.4em;
+    border-bottom: 1px solid black;
+  }
+  td {
+    padding: 0.4em;
+  }
+}
+.react-datepicker__tether-element {
+  width: 100%;
+  top: 30px;
+  .react-datepicker {
+    font-size: 1rem;
+    width: 100%;
+    top: 10px;
+    .react-datepicker__triangle {
+      display: none;
+    }
+    .react-datepicker__month-container {
+      display: block;
+      float: none;
+      .react-datepicker__day {
+        width: 2rem;
+        line-height: 2rem;
+        margin: 0.3rem;
+      }
+      .react-datepicker__month {
+        padding: 1em 0;
+      }
+    }
+  }
+}
