@@ -6,6 +6,8 @@
     "autoprefixer-stylus": "0.10.0",
     "concurrently": "3.0.0",
     "eslint-config-motley": "^4.0.0",
+    "node-sass": "^3.10.1",
+    "nodemon": "^1.11.0",
     "react-scripts": "0.6.1",
     "stylus": "0.54.5"
   },
@@ -28,10 +30,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "css": "tachyons src/css/app.css > src/index.css --minify",
-    "styles": "stylus -u autoprefixer-stylus ./src/css/style.styl -o ./src/css/style.css",
-    "styles:watch": "stylus -u autoprefixer-stylus -w ./src/css/style.styl -o ./src/css/style.css",
-    "prestart": "npm run css",
-    "prebuild": "npm run css"
+    "build-css": "node-sass --include-path src/css src/css/main.scss src/index.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+    "css": "tachyons src/css/app.css > src/tachyons.css --minify",
+    "prestart": "npm run css build-css",
+    "prebuild": "npm run css build-css"
   }
 }
