@@ -1,10 +1,11 @@
 import React from "react";
+import Link from "react-router/Link";
 
 const Navigation = () => {
   return (
     <ul>
-      <li><a href={"/"}>Calendar</a></li>
-      <li><a>Players</a></li>
+      <li><Link to="/">Calendar</Link></li>
+      <li><Link to="/players">Players</Link></li>
     </ul>
   );
 };
