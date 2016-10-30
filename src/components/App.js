@@ -1,13 +1,21 @@
 import React, { Component } from "react";
+import { Match, Miss } from "react-router";
 import Navigation from "./Navigation";
-import Players from "./Players";
+import DatePlayers from "./DatePlayers";
+import DateSelector from "./DateSelector";
+import AllPlayers from "./AllPlayers";
+import Player from "./Player";
+import NotFound from "./NotFound";
 import base from "../base";
+
+require("react-datepicker/dist/react-datepicker.css");
 
 class App extends Component {
   constructor() {
     super();
     this.addPlayer = this.addPlayer.bind(this);
     this.playerAttending = this.playerAttending.bind(this);
+    this.addPayment = this.addPayment.bind(this);
     this.state = {
       players: {},
     };
@@ -28,11 +36,19 @@ class App extends Component {
     players[`player-${timestamp}`] = player;
     this.setState({ players });
   }
-  playerAttending(player) {
+  addPayment(player, payment) {
+    const players = { ...this.state.players };
+    const payments = this.state.players[player].payments || [];
+    payments.push(payment);
+    players[player].payments = payments;
+    this.setState({
+      players,
+    });
+  }
+  playerAttending(player, selectedDate) {
     /* Adds / removes selected dates to player dates array */
     /* Dates array is created if needed */
     const players = { ...this.state.players };
-    const selectedDate = this.props.params.selectedDate;
     const dates = this.state.players[player].dates || [];
     const attending = (dates && (dates.indexOf(selectedDate) > -1));
     if (!attending) {
@@ -50,20 +66,48 @@ class App extends Component {
     return (
       <div>
         <Navigation />
-        <Players
+        {/* <DatePlayers
           addPlayer={this.addPlayer}
           playerAttending={this.playerAttending}
           players={this.state.players}
           selectedDate={this.props.params.selectedDate}
-        />
+        /> */}
+        <div className="content">
+          <Match
+            exactly pattern="/"
+            component={defaultProps => <DateSelector {...defaultProps} />}
+          />
+          <Match
+            exactly pattern="/dates/:selectedDate"
+            component={defaultProps =>
+              <DatePlayers
+                {...defaultProps}
+                players={this.state.players}
+                playerAttending={this.playerAttending}
+              />}
+          />
+          <Match
+            exactly pattern="/players"
+            component={defaultProps =>
+              <AllPlayers
+                {...defaultProps}
+                players={this.state.players}
+              />}
+          />
+          <Match
+            exactly pattern="/player/:playerName"
+            component={defaultProps =>
+              <Player
+                {...defaultProps}
+                players={this.state.players}
+                addPayment={this.addPayment}
+              />}
+          />
+          <Miss component={defaultProps => <NotFound {...defaultProps} />} />
+        </div>
       </div>
     );
   }
 }
 
-// App.propTypes = {
-//   params: {
-//     selectedDate: React.PropTypes.func,
-//   },
-// };
 export default App;
