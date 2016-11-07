@@ -4,14 +4,19 @@ import PlayerPaymentsList from "./PlayerPaymentsList";
 
 class Player extends React.Component {
   render() {
-    const { players, addPayment } = this.props;
+    const { players, addPayment, removePayment } = this.props;
     const { playerName } = this.props.params;
     if (Object.keys(players).length > 0 && players.constructor === Object) {
+      console.log(players[playerName]);
       return (
         <div>
           <h1 className="tc">{players[playerName].name}</h1>
           <AddPaymentForm playerName={playerName} addPayment={addPayment} />
-          <PlayerPaymentsList payments={players[playerName].payments} />
+          <PlayerPaymentsList
+            playerName={playerName}
+            payments={players[playerName].payments}
+            removePayment={removePayment}
+          />
         </div>
       );
     }
@@ -28,6 +33,7 @@ Player.propTypes = {
     playerName: React.PropTypes.string,
   }),
   addPayment: React.PropTypes.func,
+  removePayment: React.PropTypes.func,
 };
 
 export default Player;

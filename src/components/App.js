@@ -16,6 +16,7 @@ class App extends Component {
     this.addPlayer = this.addPlayer.bind(this);
     this.playerAttending = this.playerAttending.bind(this);
     this.addPayment = this.addPayment.bind(this);
+    this.removePayment = this.removePayment.bind(this);
     this.state = {
       players: {},
     };
@@ -39,11 +40,22 @@ class App extends Component {
   addPayment(player, payment) {
     const players = { ...this.state.players };
     const payments = this.state.players[player].payments || [];
-    payments.push(payment);
+    const timestamp = Date.now();
+    payments[`payment-${timestamp}`] = payment;
+
+    // console.log(payments);
+    // payments.push(payment);
     players[player].payments = payments;
     this.setState({
       players,
     });
+  }
+  removePayment(player, paymentKey) {
+    const players = { ...this.state.players };
+    players[player].payments[paymentKey] = null;
+    this.setState({
+      players,
+    })
   }
   playerAttending(player, selectedDate) {
     /* Adds / removes selected dates to player dates array */
@@ -101,6 +113,7 @@ class App extends Component {
                 {...defaultProps}
                 players={this.state.players}
                 addPayment={this.addPayment}
+                removePayment={this.removePayment}
               />}
           />
           <Miss component={defaultProps => <NotFound {...defaultProps} />} />
