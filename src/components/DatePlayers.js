@@ -8,17 +8,17 @@ const moment = require("moment");
 class DatePlayers extends React.Component {
   render() {
     const { players } = this.props;
+    const { selectedDate } = this.props.params;
     return (
       <div>
         <h1 className="f1 lh-solid date-styled date-styled--large">
-          <span className="day">{moment(this.props.params.selectedDate).format("D")}</span>
-          <span className="month">{moment(this.props.params.selectedDate).format("MMMM")}</span>
-          <span className="year">{moment(this.props.params.selectedDate).format("YYYY")}</span>
+          <span className="day">{moment(selectedDate).format("D")}</span>
+          <span className="month">{moment(selectedDate).format("MMMM")}</span>
+          <span className="year">{moment(selectedDate).format("YYYY")}</span>
         </h1>
         <ul className="list pl0 ml0 center mw6 bt bb b--light-silver">
           { Object.keys(players).map((key) => {
             const dates = players[key].dates;
-            const selectedDate = this.props.params.selectedDate;
             let isAttending = "";
             if (dates && (dates.indexOf(selectedDate) > -1)) {
               isAttending = true;

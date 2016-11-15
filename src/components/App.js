@@ -55,7 +55,7 @@ class App extends Component {
     players[player].payments[paymentKey] = null;
     this.setState({
       players,
-    })
+    });
   }
   playerAttending(player, selectedDate) {
     /* Adds / removes selected dates to player dates array */
@@ -103,7 +103,10 @@ class App extends Component {
             component={defaultProps =>
               <AllPlayers
                 {...defaultProps}
+                dates={this.state.dates}
                 players={this.state.players}
+                addPayment={this.addPayment}
+                removePayment={this.removePayment}
               />}
           />
           <Match
@@ -111,6 +114,7 @@ class App extends Component {
             component={defaultProps =>
               <Player
                 {...defaultProps}
+                dates={this.state.dates}
                 players={this.state.players}
                 addPayment={this.addPayment}
                 removePayment={this.removePayment}

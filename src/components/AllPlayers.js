@@ -1,10 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 import AddPlayerForm from "./AddPlayerForm";
+import PlayerAttendanceList from "./PlayerAttendanceList";
+import PlayerPaymentsList from "./PlayerPaymentsList";
 
 class AllPlayers extends React.Component {
   render() {
-    const { players } = this.props;
+    const { players, removePayment } = this.props;
     return (
       <div>
         <h1>List of players</h1>
@@ -16,11 +18,21 @@ class AllPlayers extends React.Component {
               bb: true,
               "b--light-silver": true,
             });
+            const playerName = players[key].name;
             return (
               <li
                 className={liClass}
                 key={key}
-              >{players[key].name}</li>);
+              >{playerName}
+                <PlayerAttendanceList
+                  dates={players[key].dates}
+                />
+                <PlayerPaymentsList
+                  playerName={playerName}
+                  payments={players[key].payments}
+                  removePayment={removePayment}
+                />
+              </li>);
           })}
         </ul>
         <AddPlayerForm addPlayer={this.props.addPlayer} />
